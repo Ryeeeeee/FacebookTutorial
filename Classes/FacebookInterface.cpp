@@ -14,7 +14,7 @@ extern jsval anonEvaluate(JSContext *cx, JSObject *thisObj, const char* string);
 JSObject *fbObject = NULL;
 */
 
-const char* FBJavaClassName = "org/cocos/fbtutorial/FacebookTutorial";
+const char* FBJavaClassName = "org/cocos/fbtutorial/FacebookConnectPlugin";
 extern "C"{
 	/*void Java_org_cocos_fbtutorial_FacebookTutorial_nativeCallback(JNIEnv*  env, jobject thiz, jint cbIndex,jstring params)
 	{
