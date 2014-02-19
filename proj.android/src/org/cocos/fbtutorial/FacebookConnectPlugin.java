@@ -41,7 +41,28 @@ public class FacebookConnectPlugin {
 			Session.openActiveSession(activity, true, statusCallback);
 		}
 	}
-
+	public static void logout(int cbIndex, String scope) {
+		instance.logout_();
+	}
+	
+	public void logout_() {
+		 Session session = Session.getActiveSession();
+	        if (!session.isClosed()) {
+	            session.closeAndClearTokenInformation();
+	        }
+	}
+	public static void getStatus(int cbIndex, String scope) {
+		instance.getStatus_();
+	}
+	
+	public void getStatus_() {
+		/*
+		 Session session = Session.getActiveSession();
+	        if (!session.isClosed()) {
+	            session.closeAndClearTokenInformation();
+	        }
+	        */
+	}
 	public void onResume() {
 		// For scenarios where the main activity is launched and user
 		// session is not null, the session state change notification

@@ -1,29 +1,29 @@
 obj/local/armeabi/objs/box2d_static/Rope/b2Rope.o: \
- /Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/Rope/b2Rope.cpp \
- /Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Rope/b2Rope.h \
- /Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Math.h \
- /Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h \
- /Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
- /Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
- /Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
- /Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef \
- /Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/limits \
- /Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Draw.h
+ /Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/Rope/b2Rope.cpp \
+ /Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Rope/b2Rope.h \
+ /Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Math.h \
+ /Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h \
+ /Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert \
+ /Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
+ /Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
+ /Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef \
+ /Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/limits \
+ /Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Draw.h
 
-/Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Rope/b2Rope.h:
+/Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Rope/b2Rope.h:
 
-/Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Math.h:
+/Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Math.h:
 
-/Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h:
+/Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Settings.h:
 
-/Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert:
+/Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cassert:
 
-/Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
+/Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath:
 
-/Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat:
+/Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat:
 
-/Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef:
+/Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/cstddef:
 
-/Users/su1livan/Desktop/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/limits:
+/Users/liuyuye/Desktop/adt-bundle-mac-x86_64-20131030/android-ndk-r8e/sources/cxx-stl/gnu-libstdc++/4.6/include/limits:
 
-/Users/su1livan/Desktop/cocos2d-x-2.2.2/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Draw.h:
+/Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/proj.android/../../../external/Box2D/../Box2D/Common/b2Draw.h:
