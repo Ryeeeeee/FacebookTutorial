@@ -2,14 +2,14 @@ package org.cocos.fbtutorial;
 
 import java.util.Arrays;
 
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 
 public class FacebookConnectPlugin {
 	private static final String TAG = "FacebookPlugin";
@@ -31,12 +31,13 @@ public class FacebookConnectPlugin {
 	public static void login(int cbIndex, String scope) {
 		instance.login_();
 	}
-	
+
 	public void login_() {
 		Session session = Session.getActiveSession();
 		if (!session.isOpened() && !session.isClosed()) {
-			session.openForRead(new Session.OpenRequest(activity).setPermissions(
-					Arrays.asList("basic_info")).setCallback(statusCallback));
+			session.openForRead(new Session.OpenRequest(activity)
+					.setPermissions(Arrays.asList("basic_info")).setCallback(
+							statusCallback));
 		} else {
 			Session.openActiveSession(activity, true, statusCallback);
 		}
@@ -71,9 +72,6 @@ public class FacebookConnectPlugin {
 		if (session != null && (session.isOpened() || session.isClosed())) {
 			onSessionStateChange(session, session.getState(), null);
 		}
-		if(uiHelper == null){
-			Log.i(TAG, "ddd");
-		}
 		uiHelper.onResume();
 	}
 
@@ -93,6 +91,8 @@ public class FacebookConnectPlugin {
 		uiHelper.onDestroy();
 	}
 
+	
+
 	private void onSessionStateChange(Session session, SessionState state,
 			Exception exception) {
 		if (state.isOpened()) {
@@ -102,12 +102,15 @@ public class FacebookConnectPlugin {
 		}
 	}
 
-	private class SessionStatusCallback implements Session.StatusCallback {
+	private class SessionStatusCallback implements Session.StatusCallback{
 		@Override
 		public void call(Session session, SessionState state,
 				Exception exception) {
 			// Respond to session state changes, ex: updating the view
 			onSessionStateChange(session, state, exception);
 		}
+
 	}
+
+	
 }
