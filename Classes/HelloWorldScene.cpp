@@ -8,6 +8,10 @@ USING_NS_CC;
 
 using namespace std;
 
+
+bool HelloWorld::isCallBack = false;
+int  HelloWorld::pressedButtonNum = -1;
+
 CCScene* HelloWorld::scene()
 {
     CCScene *scene = CCScene::create();
@@ -25,13 +29,21 @@ bool HelloWorld::init()
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+
+    
+    statusLabel = CCLabelTTF::create("LogIn", "Arial", 100);
+    statusLabel->setColor(ccBLUE);
+    statusLabel->setPosition(ccp(origin.x + statusLabel->getContentSize().width/2,
+                            origin.y + visibleSize.height - statusLabel->getContentSize().height));
+    
+    this->addChild(statusLabel, 1);
     
     CCMenu* pMenu = CCMenu::create(NULL);
     pMenu->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     
     this->addChild(pMenu, 1);
     
-    
+    // add Facebook1
     vector<string> menuVect;
     menuVect.push_back("login");
     menuVect.push_back("logout");
@@ -45,23 +57,65 @@ bool HelloWorld::init()
         ItemFont->setTag(i);
         pMenu->addChild(ItemFont);
     }
+    
     pMenu->alignItemsVerticallyWithPadding(30);
+    
+    CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(HelloWorld::FacebookCallback), this, 1.0, false);
+
     return true;
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    CCMenuItemFont * ItemFont =  (CCMenuItemFont *) pSender;
     
-    if (0)
+    HelloWorld::pressedButtonNum = ItemFont->getTag();
+    
+    switch (HelloWorld::pressedButtonNum)
     {
-        FacebookInterface::login(13, "publish_actions");
+        case 0:
+        {
+            FacebookInterface::login(0, "login");
+        }
+        break;
+        // add Facebook2
+        case 1:
+        {
+            FacebookInterface::logout(1);
+        }
+        break;
+        
+        default:
+        break;
     }
-    
 #endif
 }
 
 void HelloWorld::CallFunctionName(int cbIndex,string tstr)
 {
-    CCLOG("%s",tstr.c_str());
+    isCallBack = true;
+    HelloWorld::pressedButtonNum = cbIndex;
+   // CCLOG("%s",tstr.c_str());
 }
+void HelloWorld::FacebookCallback(float dt)
+{
+    if (!isCallBack)
+    {
+        return;
+    }
+    switch (HelloWorld::pressedButtonNum)
+    {
+        // add Facebook3
+        case 0:
+        {
+            statusLabel->setString("logout");
+        }
+        break;
+        
+        default:
+        break;
+    }
+}
+
+
