@@ -17,6 +17,7 @@ JSObject *fbObject = NULL;
 const char* FBJavaFriendClassName = "org/cocos/fbtutorial/FacebookPickFriendPlugin";
 const char* FBJavaLoginClassName = "org/cocos/fbtutorial/FacebookConnectPlugin";
 const char* FBJavaPostClassName = "org/cocos/fbtutorial/FacebookPostPlugin";
+const char* FBJavaSendRequestsClassName = "org/cocos/fbtutorial/FacebookSendRequestsPlugin";
 extern "C"{
 	/*void Java_org_cocos_fbtutorial_FacebookTutorial_nativeCallback(JNIEnv*  env, jobject thiz, jint cbIndex,jstring params)
 	{
@@ -65,7 +66,7 @@ void FacebookInterface::pickFriend(int cbIndex){
 	if (cocos2d::JniHelper::getStaticMethodInfo(t
 		, FBJavaFriendClassName
 		, "pickFriend"
-		, "()V"))
+		, "(I)V"))
 	{
 		t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex);
 		t.env->DeleteLocalRef(t.classID);
@@ -77,7 +78,19 @@ void FacebookInterface::postStatus(int cbIndex){
 	if (cocos2d::JniHelper::getStaticMethodInfo(t
 		, FBJavaPostClassName
 		, "postStatus"
-		, "()V"))
+		, "(I)V"))
+	{
+		t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex);
+		t.env->DeleteLocalRef(t.classID);
+	}   
+}
+
+void FacebookInterface::sendRequests(int cbIndex){
+	cocos2d::JniMethodInfo t;
+	if (cocos2d::JniHelper::getStaticMethodInfo(t
+		, FBJavaSendRequestsClassName
+		, "sendRequests"
+		, "(I)V"))
 	{
 		t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex);
 		t.env->DeleteLocalRef(t.classID);

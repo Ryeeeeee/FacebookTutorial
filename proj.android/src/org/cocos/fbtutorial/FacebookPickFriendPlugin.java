@@ -18,7 +18,7 @@ public class FacebookPickFriendPlugin {
 	private Activity activity;
 	boolean pickFriendsWhenSessionOpened;
 
-	public static void pickFriend() {
+	public static void pickFriend(int cbIndex) {
 		instance.pickFriend_();
 	}
 

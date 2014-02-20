@@ -104,6 +104,7 @@ public class PickFriendsActivity extends FragmentActivity {
             // Load data, unless a query has already taken place.
             friendPickerFragment.loadData(false);
         } catch (Exception ex) {
+        	ex.printStackTrace();
             onError(ex);
         }
     }

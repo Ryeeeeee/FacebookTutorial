@@ -3,6 +3,9 @@ package org.cocos.fbtutorial;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,23 +25,40 @@ public class FacebookPostPlugin {
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback statusCallback = new SessionStatusCallback();
 	private Activity activity;
+	private Handler handler;
 
 	public FacebookPostPlugin(Activity activity) {
 		this.activity = activity;
 		instance = this;
 		uiHelper = new UiLifecycleHelper(activity, statusCallback);
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				switch(msg.what){
+				case 1:
+					postStatus_();
+					break;
+				default:
+					break;
+				}
+			}
+		};
 	}
 
-	public static void postStatus() {
-		instance.postStatus_();
+	public static void postStatus(int cbIndex) {
+		Message message = Message.obtain();
+		message.what = 1;
+		instance.handler.sendMessage(message);
+		//instance.postStatus_();
 	}
 
 	public void postStatus_() {
-
+		
 		if (FacebookDialog.canPresentShareDialog(
 				activity.getApplicationContext(),
 				FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
-
+			Log.i(TAG, "canPresent");
 			// Publish the post using the Share Dialog
 			FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(
 					activity)
@@ -47,6 +67,7 @@ public class FacebookPostPlugin {
 
 		} else {
 			// Fallback. For example, publish the post using the Feed Dialog
+			Log.i(TAG, "webdialog");
 			publishFeedDialog();
 		}
 

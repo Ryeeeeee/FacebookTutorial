@@ -34,16 +34,19 @@ public class FacebookTutorial extends Cocos2dxActivity {
 	protected FacebookConnectPlugin facebookLoginPlugin = null;
 	protected FacebookPickFriendPlugin facebooFriendPlugin = null;
 	protected FacebookPostPlugin facebookPostPlugin = null;
-	
+	protected FacebookSendRequestsPlugin facebookSendRequestsPlugin = null;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		facebookLoginPlugin = new FacebookConnectPlugin(this);
 		facebooFriendPlugin = new FacebookPickFriendPlugin(this);
 		facebookPostPlugin = new FacebookPostPlugin(this);
+		facebookSendRequestsPlugin = new FacebookSendRequestsPlugin(this);
 		facebookLoginPlugin.onCreate(savedInstanceState);
 		facebooFriendPlugin.onCreate(savedInstanceState);
 		facebookPostPlugin.onCreate(savedInstanceState);
+		facebookSendRequestsPlugin.onCreate(savedInstanceState);
+		
 	}
 
 	public Cocos2dxGLSurfaceView onCreateView() {
@@ -64,6 +67,7 @@ public class FacebookTutorial extends Cocos2dxActivity {
 		facebookLoginPlugin.onResume();
 		facebooFriendPlugin.onResume();
 		facebookPostPlugin.onResume();
+		facebookSendRequestsPlugin.onResume();
 	}
 
 	@Override
@@ -72,6 +76,7 @@ public class FacebookTutorial extends Cocos2dxActivity {
 		facebookLoginPlugin.onActivityResult(requestCode, resultCode, data);
 		facebooFriendPlugin.onActivityResult(requestCode, resultCode, data);
 		facebookPostPlugin.onActivityResult(requestCode, resultCode, data);
+		facebookSendRequestsPlugin.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -80,6 +85,7 @@ public class FacebookTutorial extends Cocos2dxActivity {
 		facebookLoginPlugin.onPause();
 		facebooFriendPlugin.onPause();
 		facebookPostPlugin.onPause();
+		facebookSendRequestsPlugin.onPause();
 	}
 
 	@Override
@@ -88,6 +94,7 @@ public class FacebookTutorial extends Cocos2dxActivity {
 		facebookLoginPlugin.onDestory();
 		facebooFriendPlugin.onDestory();
 		facebookPostPlugin.onDestory();
+		facebookSendRequestsPlugin.onDestory();
 	}
 
 	@Override
@@ -96,6 +103,7 @@ public class FacebookTutorial extends Cocos2dxActivity {
 		facebookLoginPlugin.onSaveInstanceState(outState);
 		facebooFriendPlugin.onSaveInstanceState(outState);
 		facebookPostPlugin.onSaveInstanceState(outState);
+		facebookSendRequestsPlugin.onSaveInstanceState(outState);
 	}
 
 }

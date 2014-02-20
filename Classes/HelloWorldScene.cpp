@@ -48,12 +48,14 @@ bool HelloWorld::init()
     menuVect.push_back("login");
     menuVect.push_back("logout");
     menuVect.push_back("getStatus");
-    
+    menuVect.push_back("post");
+    menuVect.push_back("pickFriend");
+    menuVect.push_back("sendRequests");
     
     for (int i = 0; i<menuVect.size(); i++)
     {
         CCMenuItemFont * ItemFont = CCMenuItemFont::create(menuVect[i].c_str(), this, menu_selector(HelloWorld::menuCloseCallback));
-        ItemFont->setFontSize(100);
+        ItemFont->setFontSize(30);
         ItemFont->setTag(i);
         pMenu->addChild(ItemFont);
     }
@@ -85,7 +87,15 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
             FacebookInterface::logout(1);
         }
         break;
-        
+        case 3:
+            FacebookInterface::postStatus(3);
+            break;
+        case 4:
+            FacebookInterface::pickFriend(4);
+            break;
+        case 5:
+            FacebookInterface::sendRequests(5);
+        break;
         default:
         break;
     }
