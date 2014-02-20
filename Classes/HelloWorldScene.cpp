@@ -31,7 +31,8 @@ bool HelloWorld::init()
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
     
-    statusLabel = CCLabelTTF::create("LogIn", "Arial", 100);
+    statusLabel = CCLabelTTF::create("LogIn", "Arial", 100,
+                                     CCSizeMake(100*5, 0), kCCTextAlignmentCenter,kCCVerticalTextAlignmentTop);
     statusLabel->setColor(ccBLUE);
     statusLabel->setPosition(ccp(origin.x + statusLabel->getContentSize().width/2,
                             origin.y + visibleSize.height - statusLabel->getContentSize().height));
@@ -85,6 +86,12 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
             FacebookInterface::logout(1);
         }
         break;
+            
+        case 2:
+        {
+            statusLabel->setString(FacebookInterface::getStatus(1));
+        }
+            break;
         
         default:
         break;
@@ -110,6 +117,11 @@ void HelloWorld::FacebookCallback(float dt)
         case 0:
         {
             statusLabel->setString("logout");
+        }
+        break;
+        case 1:
+        {
+            statusLabel->setString("login");
         }
         break;
         

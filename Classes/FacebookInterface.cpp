@@ -5,38 +5,14 @@
 #include <jni.h>
 #include <android/log.h>
 
-/*
-#include "ScriptingCore.h"
-
-const char* FBJavaClassName = "org/cocos2dx/facebookjsb/FacebookConnectPlugin";
-
-extern jsval anonEvaluate(JSContext *cx, JSObject *thisObj, const char* string);
-JSObject *fbObject = NULL;
-*/
-
 const char* FBJavaClassName = "org/cocos/fbtutorial/FacebookConnectPlugin";
-extern "C"{
-	/*void Java_org_cocos_fbtutorial_FacebookTutorial_nativeCallback(JNIEnv*  env, jobject thiz, jint cbIndex,jstring params)
-	{
-		
-		//ScriptingCore* sc = ScriptingCore::getInstance();
-		//JSContext *cx = sc->getGlobalContext();
-		
-		//if (fbObject == NULL)
-		//	fbObject = JSVAL_TO_OBJECT(anonEvaluate(cx, sc->getGlobalObject(), "(function () { return FB; })()"));
-		//
-		//jsval res;
-		
-		if (params != NULL)
+extern "C"
+{
+    void Java_org_cocos_fbtutorial_FacebookConnectPlugin_nativeCallback(JNIEnv*  env, jobject thiz, jint cbIndex,jstring params)
+    {
+        
+        if (params != NULL)
 		{
-			//jsval argv[2];
-			//argv[0] = INT_TO_JSVAL(cbIndex);
-			
-			//std::string tstr = JniHelper::jstring2string(params);
-			//argv[1] = std_string_to_jsval(cx,tstr);
-
-			//JS_CallFunctionName(cx, fbObject, "callback", 2, argv, &res);
-
 			const char* str;
         	str = env->GetStringUTFChars(params, 0);
         	std::string tstr(str);
@@ -44,19 +20,11 @@ extern "C"{
 		}
 		else
 		{
-			//jsval argv[1];
-			//argv[0] = INT_TO_JSVAL(cbIndex);
-
-			//JS_CallFunctionName(cx, fbObject, "callback", 1, argv, &res);
 			std::string tstr = "";
 			HelloWorld::CallFunctionName(cbIndex,tstr);
 		}
-	}*/
+    }
 };
-
-void FacebookInterface::callbackJs(int cbIndex, const char* params){
-	
-}
 
 void FacebookInterface::login(int cbIndex,const char* scope){
 	
@@ -81,32 +49,33 @@ void FacebookInterface::login(int cbIndex,const char* scope){
 }
 
 void FacebookInterface::logout(int cbIndex){
-	/*
-	JniMethodInfo t;
-	if (JniHelper::getStaticMethodInfo(t
-		, FBJavaClassName
-		, "logout"
-		, "(I)V"))
-	{
-		t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex);
-		t.env->DeleteLocalRef(t.classID);
-	}  
-	*/	
-}
-
-void FacebookInterface::getLoginStatus(int cbIndex){
-	
 	cocos2d::JniMethodInfo t;
 	if (cocos2d::JniHelper::getStaticMethodInfo(t
-		, FBJavaClassName
-		, "getLoginStatus"
-		, "(I)V"))
+                                       , FBJavaClassName
+                                       , "logout"
+                                       , "(I)V"))
 	{
 		t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex);
 		t.env->DeleteLocalRef(t.classID);
 	}  	
-	
 }
+
+const char* FacebookInterface::getStatus(int cbIndex){
+	
+	cocos2d::JniMethodInfo t;
+	if (cocos2d::JniHelper::getStaticMethodInfo(t
+                                                , FBJavaClassName
+                                                , "getStatus"
+                                                , "(I)Ljava/lang/String;"))
+	{
+		jstring ret = (jstring)(t.env->CallStaticObjectMethod(t.classID, t.methodID,cbIndex));
+        t.env->DeleteLocalRef(t.classID);
+        const char* aStr = " ";
+        aStr = t.env->GetStringUTFChars(ret, false);
+        return aStr;
+	}  
+}
+
 
 std::string FacebookInterface::api(const char* graphPath,const char* method,const char* params,int cbIndex){
 	std::string errorRet;
