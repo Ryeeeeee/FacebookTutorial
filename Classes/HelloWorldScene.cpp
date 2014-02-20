@@ -35,7 +35,7 @@ bool HelloWorld::init()
                                      CCSizeMake(100*5, 0), kCCTextAlignmentCenter,kCCVerticalTextAlignmentTop);
     statusLabel->setColor(ccBLUE);
     statusLabel->setPosition(ccp(origin.x + statusLabel->getContentSize().width/2,
-                            origin.y + visibleSize.height - statusLabel->getContentSize().height));
+                                 origin.y + visibleSize.height/2));
     
     this->addChild(statusLabel, 1);
     
