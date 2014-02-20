@@ -124,7 +124,7 @@ void FacebookInterface::getLoginStatus(int cbIndex){
 	
 	cocos2d::JniMethodInfo t;
 	if (cocos2d::JniHelper::getStaticMethodInfo(t
-		, FBJavaClassName
+		, FBJavaLoginClassName
 		, "getLoginStatus"
 		, "(I)V"))
 	{
@@ -170,7 +170,7 @@ std::string FacebookInterface::api(const char* graphPath,const char* method,cons
 }
 
 void FacebookInterface::ui(const char* params,int cbIndex){
-	
+	/*
 	cocos2d::JniMethodInfo t;
 	if (cocos2d::JniHelper::getStaticMethodInfo(t
 		, FBJavaClassName
@@ -182,7 +182,7 @@ void FacebookInterface::ui(const char* params,int cbIndex){
 		t.env->DeleteLocalRef(jparams);
 		t.env->DeleteLocalRef(t.classID);
 	}  
-
+	*/
 }
 
 #endif
