@@ -231,6 +231,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_login_button=0x7f040017;
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f040015;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f040016;
+        public static final int friend_picker_fragment=0x7f040018;
         public static final int large=0x7f040002;
         public static final int normal=0x7f040001;
         public static final int picker_subtitle=0x7f040012;
@@ -251,6 +252,7 @@ containing a value of this type.
         public static final int com_facebook_placepickerfragment_list_row=0x7f03000b;
         public static final int com_facebook_search_bar_layout=0x7f03000c;
         public static final int com_facebook_usersettingsfragment=0x7f03000d;
+        public static final int pick_friends_activity=0x7f03000e;
     }
     public static final class string {
         public static final int app_id=0x7f07001a;
@@ -280,6 +282,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f070008;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f070009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f07000a;
+        public static final int exception=0x7f07001b;
     }
     public static final class style {
         public static final int com_facebook_loginview_default_style=0x7f080000;

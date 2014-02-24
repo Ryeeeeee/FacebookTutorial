@@ -11,6 +11,7 @@ using namespace std;
 
 bool HelloWorld::isCallBack = false;
 int  HelloWorld::pressedButtonNum = -1;
+string HelloWorld::friendListStr = "";
 
 CCScene* HelloWorld::scene()
 {
@@ -49,7 +50,9 @@ bool HelloWorld::init()
     menuVect.push_back("login");
     menuVect.push_back("logout");
     menuVect.push_back("getStatus");
-    
+    menuVect.push_back("post");
+    menuVect.push_back("pickFriend");
+    menuVect.push_back("sendRequests");
     
     for (int i = 0; i<menuVect.size(); i++)
     {
@@ -86,13 +89,21 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
             FacebookInterface::logout(1);
         }
         break;
-            
         case 2:
         {
             statusLabel->setString(FacebookInterface::getStatus(1));
         }
             break;
-        
+        case 3:
+            FacebookInterface::postStatus(3);
+            break;
+        case 4:
+            FacebookInterface::pickFriend(4);
+            break;
+        case 5:
+            FacebookInterface::sendRequests(5);
+        break;
+            
         default:
         break;
     }
@@ -101,9 +112,21 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 
 void HelloWorld::CallFunctionName(int cbIndex,string tstr)
 {
-    isCallBack = true;
     HelloWorld::pressedButtonNum = cbIndex;
-   // CCLOG("%s",tstr.c_str());
+    switch (HelloWorld::pressedButtonNum)
+    {
+        case 3:
+            break;
+        case 4:
+            HelloWorld::friendListStr = tstr;
+            CCLOG("HelloWorld::friendListStr=%s",HelloWorld::friendListStr.c_str());
+            break;
+        case 5:
+            break;
+        default:
+            break;
+    }
+    isCallBack = true;
 }
 void HelloWorld::FacebookCallback(float dt)
 {
@@ -113,18 +136,37 @@ void HelloWorld::FacebookCallback(float dt)
     }
     switch (HelloWorld::pressedButtonNum)
     {
+        isCallBack = false;
         // add Facebook3
         case 0:
         {
             statusLabel->setString("logout");
         }
-        break;
+            break;
         case 1:
         {
             statusLabel->setString("login");
         }
-        break;
+            break;
+        case 2:
+        {
+            statusLabel->setString(FacebookInterface::getStatus(1));
+        }
+            break;
+        case 3:
+        {
         
+        }
+            //FacebookInterface::postStatus(3);
+            break;
+        case 4:
+        {
+            statusLabel->setString(HelloWorld::friendListStr.c_str());
+        }
+            break;
+        case 5:
+            //FacebookInterface::sendRequests(5);
+            break;
         default:
         break;
     }

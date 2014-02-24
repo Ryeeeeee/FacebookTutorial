@@ -6,14 +6,15 @@
 class FacebookInterface
 {
 public:
+    //for callback
+    static void callbackJs(int cbIndex, const char* params);
+    
     static void login(int cbIndex,const char* scope);
 	static void logout(int cbIndex);
     static const char* getStatus(int cbIndex);
-	static std::string api(const char* graphPath,const char* method,const char* params,int cbIndex);
-	static void ui(const char* params,int cbIndex);
-    
-    //for callback
-    static void callbackJs(int cbIndex, const char* params);
+    static void pickFriend(int cbIndex);
+    static void postStatus(int cbIndex);
+    static void sendRequests(int cbIndex);
 };
 
 #endif  //__INTERFACE_FACEBOOK_H_

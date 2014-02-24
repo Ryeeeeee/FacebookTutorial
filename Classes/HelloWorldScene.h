@@ -18,6 +18,8 @@ public:
     
     static int  pressedButtonNum;
     
+    static std::string friendListStr;
+    
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
     

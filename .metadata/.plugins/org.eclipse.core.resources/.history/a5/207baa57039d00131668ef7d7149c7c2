@@ -1,17 +1,15 @@
 package org.cocos.fbtutorial;
 
 import java.util.Arrays;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.facebook.Request;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 
 public class FacebookConnectPlugin {
 	private static final String TAG = "FacebookPlugin";
@@ -31,16 +29,17 @@ public class FacebookConnectPlugin {
 	}
 
 	public static void login(int cbIndex, String scope) {
-		instance.login_();
 		callIndex = cbIndex;
+		instance.login_();
 	}
-	
+
 	public void login_() {
 		
 		Session session = Session.getActiveSession();
 		if (!session.isOpened() && !session.isClosed()) {
-			session.openForRead(new Session.OpenRequest(activity).setPermissions(
-					Arrays.asList("basic_info")).setCallback(statusCallback));
+			session.openForRead(new Session.OpenRequest(activity)
+					.setPermissions(Arrays.asList("basic_info")).setCallback(
+							statusCallback));
 		} else {
 			Session.openActiveSession(activity, true, statusCallback);
 		}
@@ -56,7 +55,7 @@ public class FacebookConnectPlugin {
 	            session.closeAndClearTokenInformation();
 	        }
 	}
-	public static String getStatus(int cbIndex, String scope) {
+	public static String getStatus(int cbIndex) {
 		
 		callIndex = cbIndex;
 		
@@ -106,9 +105,6 @@ public class FacebookConnectPlugin {
 		if (session != null && (session.isOpened() || session.isClosed())) {
 			onSessionStateChange(session, session.getState(), null);
 		}
-		if(uiHelper == null){
-			Log.i(TAG, "ddd");
-		}
 		uiHelper.onResume();
 	}
 
@@ -128,6 +124,8 @@ public class FacebookConnectPlugin {
 		uiHelper.onDestroy();
 	}
 
+	
+
 	private void onSessionStateChange(Session session, SessionState state,
 			Exception exception) {
 		if (state.isOpened()) {
@@ -146,5 +144,8 @@ public class FacebookConnectPlugin {
 			
 			nativeCallback(callIndex,"");
 		}
+
 	}
+
+	
 }
