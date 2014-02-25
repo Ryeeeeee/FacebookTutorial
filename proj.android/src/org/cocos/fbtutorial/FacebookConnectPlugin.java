@@ -144,8 +144,5 @@ public class FacebookConnectPlugin {
 			
 			nativeCallback(callIndex,"");
 		}
-
-	}
-
-	
+	}	
 }

@@ -19,7 +19,6 @@ extern "C"
 			const char* str;
         	str = env->GetStringUTFChars(params, 0);
         	std::string tstr(str);
-        	CCLOG("11111111===%s",tstr.c_str());
 			HelloWorld::CallFunctionName(cbIndex,tstr);
 		}
 		else
@@ -91,14 +90,34 @@ void FacebookInterface::pickFriend(int cbIndex){
 	}
 }
 
-void FacebookInterface::postStatus(int cbIndex){
+void FacebookInterface::postStatus(int cbIndex,const char* name,const char* caption,const char* description,const char* link,const char* picture){
 	cocos2d::JniMethodInfo t;
 	if (cocos2d::JniHelper::getStaticMethodInfo(t
 		, FBJavaPostClassName
 		, "postStatus"
-		, "(I)V"))
+		, "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
 	{
-		t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex);
+		CCLOG("ajhsdkjahdkjahkjsdhakjsdhajksd");
+		if (name && caption && description && link && picture)
+		{
+			jstring nameId = t.env->NewStringUTF(name);
+			jstring captionId = t.env->NewStringUTF(name);
+			jstring descriptionId = t.env->NewStringUTF(name);
+			jstring linkId = t.env->NewStringUTF(name);
+			jstring pictureId = t.env->NewStringUTF(name);
+
+			t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex,nameId,captionId,descriptionId,linkId,pictureId);
+			t.env->DeleteLocalRef(nameId);
+			t.env->DeleteLocalRef(captionId);
+			t.env->DeleteLocalRef(descriptionId);
+			t.env->DeleteLocalRef(linkId);
+			t.env->DeleteLocalRef(pictureId);
+		}
+		else
+		{
+			t.env->CallStaticVoidMethod(t.classID, t.methodID, cbIndex,NULL);
+		}
+		
 		t.env->DeleteLocalRef(t.classID);
 	}   
 }

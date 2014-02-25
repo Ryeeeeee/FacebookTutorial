@@ -4,7 +4,7 @@
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="115" key="DIALOG_Y_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="855" key="DIALOG_X_ORIGIN"/>
+		<item value="898" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,15 +13,19 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="cbIndex" key="selection"/>
+		<item value="scope" key="selection"/>
 		<list key="findhistory">
+			<item value="scope"/>
+			<item value="const char*"/>
+			<item value="POST"/>
+			<item value="params"/>
+			<item value="data"/>
 			<item value="cbIndex"/>
 			<item value="index"/>
 			<item value="Collection"/>
-			<item value="TextUtils"/>
-			<item value="：https://mail.chukong-inc.com"/>
 		</list>
 		<list key="replacehistory">
+			<item value="String"/>
 		</list>
 	</section>
 </section>

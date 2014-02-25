@@ -95,7 +95,12 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
         }
             break;
         case 3:
-            FacebookInterface::postStatus(3);
+            FacebookInterface::postStatus(3,
+                "Facebook SDK for Android",
+                "Build great social apps and get more installs.",
+                "The Facebook SDK for Android makes it easier and faster to develop Facebook integrated Android apps.",
+                "https://developers.facebook.com/android",
+                "//https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
             break;
         case 4:
             FacebookInterface::pickFriend(4);
