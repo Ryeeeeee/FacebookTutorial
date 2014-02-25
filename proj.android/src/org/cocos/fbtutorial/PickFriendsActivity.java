@@ -20,12 +20,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 import com.facebook.FacebookException;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.FriendPickerFragment;
 import com.facebook.widget.PickerFragment;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 // This class provides an example of an Activity that uses FriendPickerFragment to display a list of
@@ -79,13 +83,29 @@ public class PickFriendsActivity extends FragmentActivity {
                 // We just store our selection in the Application for other activities to look at.
                 FriendPickerApplication application = (FriendPickerApplication) getApplication();
                 application.setSelectedUsers(friendPickerFragment.getSelection());
-
+                Collection<GraphUser> selection = application.getSelectedUsers();
+                String results = "";
+                if (selection != null && selection.size() > 0) 
+                {
+                    ArrayList<String> names = new ArrayList<String>();
+                    for (GraphUser user : selection) 
+                    {
+                        names.add(user.getName());
+                    }
+                    results = TextUtils.join(", ", names);
+                    FacebookConnectPlugin.nativeCallback(FacebookPickFriendPlugin.callIndex,results);
+                } 
+                else 
+                {
+                    results = "<No friends selected>";
+                    FacebookConnectPlugin.nativeCallback(FacebookPickFriendPlugin.callIndex,results);
+                }
+                
                 setResult(RESULT_OK, null);
                 finish();
             }
         });
     }
-
     private void onError(Exception error) {
         String text = getString(R.string.exception, error.getMessage());
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);

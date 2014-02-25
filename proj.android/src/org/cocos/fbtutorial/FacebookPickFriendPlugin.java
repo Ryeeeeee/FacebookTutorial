@@ -17,8 +17,10 @@ public class FacebookPickFriendPlugin {
 	private Session.StatusCallback statusCallback = new SessionStatusCallback();
 	private Activity activity;
 	boolean pickFriendsWhenSessionOpened;
-
+	public static int callIndex;
+	
 	public static void pickFriend(int cbIndex) {
+		callIndex = cbIndex;
 		instance.pickFriend_();
 	}
 

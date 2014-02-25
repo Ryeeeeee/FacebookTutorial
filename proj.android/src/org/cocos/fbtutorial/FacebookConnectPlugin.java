@@ -1,12 +1,12 @@
 package org.cocos.fbtutorial;
 
 import java.util.Arrays;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.Request;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
@@ -17,7 +17,7 @@ public class FacebookConnectPlugin {
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback statusCallback = new SessionStatusCallback();
 	private Activity activity;
-
+	private static int callIndex;
 	public FacebookConnectPlugin(Activity activity) {
 		this.activity = activity;
 		instance = this;
@@ -29,10 +29,12 @@ public class FacebookConnectPlugin {
 	}
 
 	public static void login(int cbIndex, String scope) {
+		callIndex = cbIndex;
 		instance.login_();
 	}
 
 	public void login_() {
+		
 		Session session = Session.getActiveSession();
 		if (!session.isOpened() && !session.isClosed()) {
 			session.openForRead(new Session.OpenRequest(activity)
@@ -42,8 +44,9 @@ public class FacebookConnectPlugin {
 			Session.openActiveSession(activity, true, statusCallback);
 		}
 	}
-	public static void logout(int cbIndex, String scope) {
+	public static void logout(int cbIndex) {
 		instance.logout_();
+		callIndex = cbIndex;
 	}
 	
 	public void logout_() {
@@ -52,17 +55,47 @@ public class FacebookConnectPlugin {
 	            session.closeAndClearTokenInformation();
 	        }
 	}
-	public static void getStatus(int cbIndex, String scope) {
-		instance.getStatus_();
+	public static String getStatus(int cbIndex) {
+		
+		callIndex = cbIndex;
+		
+		return instance.getStatus_();
 	}
 	
-	public void getStatus_() {
-		/*
-		 Session session = Session.getActiveSession();
-	        if (!session.isClosed()) {
-	            session.closeAndClearTokenInformation();
-	        }
-	        */
+	public String getStatus_() {
+		
+		Session session = Session.getActiveSession();
+	
+		if (session.getState().equals(SessionState.CREATED))
+		{
+			return "CREATED";
+		}
+		else if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED))
+		{
+			return "CREATED_TOKEN_LOADED";
+		}
+		else if (session.getState().equals(SessionState.OPENING))
+		{
+			return "OPENING";
+		}
+		else if (session.getState().equals(SessionState.OPENED))
+		{
+			return "OPENED";
+		}
+		else if (session.getState().equals(SessionState.OPENED_TOKEN_UPDATED))
+		{
+			return "OPENED_TOKEN_UPDATED";
+		}
+		else if (session.getState().equals(SessionState.CLOSED_LOGIN_FAILED))
+		{
+			return "CLOSED_LOGIN_FAILED";
+		}
+		else if (session.getState().equals(SessionState.CLOSED))
+		{
+			return "CLOSED";
+		}
+		
+		return "";
 	}
 	public void onResume() {
 		// For scenarios where the main activity is launched and user
@@ -101,16 +134,15 @@ public class FacebookConnectPlugin {
 			Log.i(TAG, "Logged out...");
 		}
 	}
-
-	private class SessionStatusCallback implements Session.StatusCallback{
+	public static native void nativeCallback(int cbIndex, String params);
+	private class SessionStatusCallback implements Session.StatusCallback {
 		@Override
 		public void call(Session session, SessionState state,
 				Exception exception) {
 			// Respond to session state changes, ex: updating the view
 			onSessionStateChange(session, state, exception);
+			
+			nativeCallback(callIndex,"");
 		}
-
-	}
-
-	
+	}	
 }

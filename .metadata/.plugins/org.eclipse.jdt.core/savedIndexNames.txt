@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+/Users/liuyuye/Desktop/FacebookDemo/projects/FacebookTutorial/.metadata/.plugins/org.eclipse.jdt.core
+1361584401.index
+3290624007.index
+3848462231.index
+2741727132.index

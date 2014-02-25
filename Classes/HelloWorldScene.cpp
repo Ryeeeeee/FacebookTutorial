@@ -11,6 +11,7 @@ using namespace std;
 
 bool HelloWorld::isCallBack = false;
 int  HelloWorld::pressedButtonNum = -1;
+string HelloWorld::friendListStr = "";
 
 CCScene* HelloWorld::scene()
 {
@@ -31,10 +32,11 @@ bool HelloWorld::init()
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
     
-    statusLabel = CCLabelTTF::create("LogIn", "Arial", 100);
+    statusLabel = CCLabelTTF::create("LogIn", "Arial", 30,
+                                     CCSizeMake(30*5, 0), kCCTextAlignmentCenter,kCCVerticalTextAlignmentTop);
     statusLabel->setColor(ccBLUE);
     statusLabel->setPosition(ccp(origin.x + statusLabel->getContentSize().width/2,
-                            origin.y + visibleSize.height - statusLabel->getContentSize().height));
+                                 origin.y + visibleSize.height/2));
     
     this->addChild(statusLabel, 1);
     
@@ -60,7 +62,7 @@ bool HelloWorld::init()
         pMenu->addChild(ItemFont);
     }
     
-    pMenu->alignItemsVerticallyWithPadding(30);
+    pMenu->alignItemsVerticallyWithPadding(10);
     
     CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(HelloWorld::FacebookCallback), this, 1.0, false);
 
@@ -87,8 +89,18 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
             FacebookInterface::logout(1);
         }
         break;
+        case 2:
+        {
+            statusLabel->setString(FacebookInterface::getStatus(1));
+        }
+            break;
         case 3:
-            FacebookInterface::postStatus(3);
+            FacebookInterface::postStatus(3,
+                "Facebook SDK for Android",
+                "Build great social apps and get more installs.",
+                "The Facebook SDK for Android makes it easier and faster to develop Facebook integrated Android apps.",
+                "https://developers.facebook.com/android",
+                "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
             break;
         case 4:
             FacebookInterface::pickFriend(4);
@@ -96,6 +108,7 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
         case 5:
             FacebookInterface::sendRequests(5);
         break;
+            
         default:
         break;
     }
@@ -104,28 +117,66 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 
 void HelloWorld::CallFunctionName(int cbIndex,string tstr)
 {
-    isCallBack = true;
     HelloWorld::pressedButtonNum = cbIndex;
-   // CCLOG("%s",tstr.c_str());
+    switch (HelloWorld::pressedButtonNum)
+    {
+        case 3:
+            break;
+        case 4:
+            HelloWorld::friendListStr = tstr;
+            CCLOG("HelloWorld::friendListStr=%s",HelloWorld::friendListStr.c_str());
+            break;
+        case 5:
+            break;
+        default:
+            break;
+    }
+    isCallBack = true;
 }
 void HelloWorld::FacebookCallback(float dt)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     if (!isCallBack)
     {
         return;
     }
     switch (HelloWorld::pressedButtonNum)
     {
+        isCallBack = false;
         // add Facebook3
         case 0:
         {
             statusLabel->setString("logout");
         }
-        break;
+            break;
+        case 1:
+        {
+            statusLabel->setString("login");
+        }
+            break;
+        case 2:
+        {
+            statusLabel->setString(FacebookInterface::getStatus(1));
+        }
+            break;
+        case 3:
+        {
         
+        }
+            //FacebookInterface::postStatus(3);
+            break;
+        case 4:
+        {
+            statusLabel->setString(HelloWorld::friendListStr.c_str());
+        }
+            break;
+        case 5:
+            //FacebookInterface::sendRequests(5);
+            break;
         default:
         break;
     }
+#endif
 }
 
 

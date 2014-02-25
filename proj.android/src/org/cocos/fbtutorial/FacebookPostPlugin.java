@@ -1,10 +1,16 @@
 package org.cocos.fbtutorial;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,9 +20,10 @@ import com.facebook.FacebookOperationCanceledException;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.android.AsyncFacebookRunner;
 import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
 import com.facebook.widget.FacebookDialog.PendingCall;
+import com.facebook.widget.WebDialog;
 import com.facebook.widget.WebDialog.OnCompleteListener;
 
 public class FacebookPostPlugin {
@@ -27,15 +34,27 @@ public class FacebookPostPlugin {
 	private Activity activity;
 	private Handler handler;
 
-	public FacebookPostPlugin(Activity activity) {
+	static public String name = null;
+	static public String caption = null;
+	static public String description = null;
+	static public String link = null;
+	static public String picture = null;
+
+	
+	
+	public FacebookPostPlugin(Activity activity) 
+	{
 		this.activity = activity;
 		instance = this;
 		uiHelper = new UiLifecycleHelper(activity, statusCallback);
-		handler = new Handler(){
+		handler = new Handler()
+		{
 			@Override
-			public void handleMessage(Message msg) {
+			public void handleMessage(Message msg) 
+			{
 				super.handleMessage(msg);
-				switch(msg.what){
+				switch(msg.what)
+				{
 				case 1:
 					postStatus_();
 					break;
@@ -46,7 +65,14 @@ public class FacebookPostPlugin {
 		};
 	}
 
-	public static void postStatus(int cbIndex) {
+	public static void postStatus(int cbIndex,String aName,String aCaption,String aDescription,String aLink,String aPicture)
+	{
+		name = aName;
+		caption = aCaption;
+		description = aDescription;
+		link = aLink;
+		picture = aPicture;
+		
 		Message message = Message.obtain();
 		message.what = 1;
 		instance.handler.sendMessage(message);
@@ -75,15 +101,55 @@ public class FacebookPostPlugin {
 
 	private void publishFeedDialog() {
 		Bundle params = new Bundle();
+
+		Log.i("name", name);
+		Log.i("caption",caption);
+		Log.i("description",description);
+		Log.i("link",link);
+		Log.i("picture",picture);
+		
+		params.putString("name", name);
+		params.putString("caption",caption);
+		params.putString("description",description);
+		params.putString("link",link);
+		params.putString("picture",picture);
+		
+		/*
 		params.putString("name", "Facebook SDK for Android");
 		params.putString("caption",
 				"Build great social apps and get more installs.");
+		
 		params.putString(
 				"description",
 				"The Facebook SDK for Android makes it easier and faster to develop Facebook integrated Android apps.");
 		params.putString("link", "https://developers.facebook.com/android");
-		params.putString("picture",
-				"https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
+		
+		
+		params.putString("picture",	"//https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
+*/
+		
+		/*
+		 params.putString("method", "photos.upload");
+		 
+		byte[] data = null;
+		
+		AssetManager am = activity.getAssets();
+		try 
+		{
+			InputStream is = am.open("CloseSelected.png");
+			Bitmap bi=BitmapFactory.decodeStream(is);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			bi.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			data = baos.toByteArray();
+			params.putByteArray("picture", data);
+			Log.i("10000","innnnnnnn");
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	*/
 
 		WebDialog feedDialog = (new WebDialog.FeedDialogBuilder(activity,
 				Session.getActiveSession(), params)).setOnCompleteListener(
